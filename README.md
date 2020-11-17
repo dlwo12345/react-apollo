@@ -7,4 +7,7 @@ https://nomadcoders.co/react-graphql-for-beginners/lobby 노마드코더 강의 
 > yarn add styled-components
 - react-router-dom
 > yarn add react-router-dom
-
+- graphql
+> yarn add graphql
+- @apollo/client
+> yarn add @apollo/client
