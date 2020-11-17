@@ -3,6 +3,15 @@ import styled from 'styled-components';
 import {gql, useQuery} from '@apollo/client';
 import Movie from '../components/Movie';
 
+const GET_MOVIES = gql`
+  {
+    movies {
+      id
+      medium_cover_image
+    }
+  }
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -47,16 +56,8 @@ const Movies = styled.div`
   top: -50px;
 `;
 
-const GET_MOVIES = gql`
-  {
-    movies {
-      id
-      medium_cover_image
-    }
-  }
-`;
 export default () => {
-  const {loading, error, data} = useQuery(GET_MOVIES);
+  const {loading, data} = useQuery(GET_MOVIES);
   return (
     <Container>
       <Header>
@@ -64,13 +65,11 @@ export default () => {
         <Subtitle>sub title</Subtitle>
       </Header>
       {loading && <Loading>Loading...</Loading>}
-      {!loading && data.movies && (
-        <Movies>
-          {data.movies.map((m) => (
-            <Movie key={m.id} id={m.id} bg={m.medium_cover_image} />
-          ))}
-        </Movies>
-      )}
+      <Movies>
+        {data?.movies?.map((m) => (
+          <Movie key={m.id} id={m.id} bg={m.medium_cover_image} />
+        ))}
+      </Movies>
     </Container>
   );
 };
